@@ -46,8 +46,8 @@ public class UtilesHASH {
         messageDigest.update( text.getBytes() );
         return messageDigest.digest();
     }
-
     // </editor-fold>
+
     // <editor-fold defaultstate="collapsed" desc="Main">
     /**
      * Pour une démonstration

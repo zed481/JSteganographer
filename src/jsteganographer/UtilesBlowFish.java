@@ -11,10 +11,6 @@ import javax.crypto.NoSuchPaddingException;
 import javax.crypto.spec.SecretKeySpec;
 import javax.swing.JPasswordField;
 
-/**
- *
- * @author Usager
- */
 public class UtilesBlowFish {
 
     // <editor-fold defaultstate="collapsed" desc="Méthodes privées">
