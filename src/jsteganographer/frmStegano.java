@@ -76,6 +76,7 @@ public class frmStegano extends javax.swing.JFrame {
         setTitle("jSteganographer v1.0");
 
         cmdSource.setText("Source...");
+        cmdSource.setToolTipText("Select source image");
         cmdSource.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmdSourceActionPerformed(evt);
@@ -85,38 +86,41 @@ public class frmStegano extends javax.swing.JFrame {
         txtImageSource.setDragEnabled(true);
 
         cmdDestination.setText("Destination...");
+        cmdDestination.setToolTipText("Select destination image with hidden text");
         cmdDestination.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmdDestinationActionPerformed(evt);
             }
         });
 
-        jLabel1.setText("Mot de passe : ");
+        jLabel1.setText("Password :");
 
-        jPasswordField.setText("jPasswordField1");
+        jPasswordField.setToolTipText("Type the password that will serve as the encryption key");
 
-        jLabel2.setText("Texte à encoder");
+        jLabel2.setText("Text to hide :");
 
         txtAEncoder.setColumns(20);
         txtAEncoder.setLineWrap(true);
         txtAEncoder.setRows(5);
         jScrollPane1.setViewportView(txtAEncoder);
 
-        cmdEncode.setText("Encode");
+        cmdEncode.setText("Hide");
+        cmdEncode.setToolTipText("Hide the text");
         cmdEncode.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmdEncodeActionPerformed(evt);
             }
         });
 
-        cmdDecode.setText("Decode");
+        cmdDecode.setText("Unhide");
+        cmdDecode.setToolTipText("Unhide the text");
         cmdDecode.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmdDecodeActionPerformed(evt);
             }
         });
 
-        cmdEffacer.setText("Effacer");
+        cmdEffacer.setText("Clear All");
         cmdEffacer.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmdEffacerActionPerformed(evt);
@@ -124,6 +128,7 @@ public class frmStegano extends javax.swing.JFrame {
         });
 
         cmdEffaceNomFichierDestination.setText("E");
+        cmdEffaceNomFichierDestination.setToolTipText("Erase the destination field (to decode a image file)");
         cmdEffaceNomFichierDestination.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmdEffaceNomFichierDestinationActionPerformed(evt);
@@ -135,16 +140,14 @@ public class frmStegano extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(25, 25, 25)
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1)
-                        .addGap(32, 32, 32))
+                    .addComponent(jScrollPane1)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(cmdSource, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(cmdDestination, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(cmdDestination))
                             .addComponent(jLabel1))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -155,25 +158,22 @@ public class frmStegano extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(cmdDecode)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(cmdEffacer)
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(cmdEffacer, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(txtImageDestination, javax.swing.GroupLayout.PREFERRED_SIZE, 459, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(cmdEffaceNomFichierDestination)
-                                        .addGap(0, 0, Short.MAX_VALUE))
-                                    .addComponent(txtImageSource))
-                                .addGap(32, 32, 32))))
+                                .addComponent(txtImageDestination, javax.swing.GroupLayout.PREFERRED_SIZE, 459, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(cmdEffaceNomFichierDestination))
+                            .addComponent(txtImageSource, javax.swing.GroupLayout.Alignment.TRAILING)))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel2)
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                        .addGap(539, 539, 539)))
+                .addGap(17, 17, 17))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(32, 32, 32)
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cmdSource)
                     .addComponent(txtImageSource, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -193,7 +193,7 @@ public class frmStegano extends javax.swing.JFrame {
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
 
         pack();
