@@ -16,7 +16,8 @@ public class UtilesSteganographie {
     private final static int BITSINBYTE = 8;
 
     // Encode
-    static void encode( String imagePath, String finalFileName, String text ) throws Exception {
+    //static BufferedImage encode( String imagePath, String finalFileName, String text ) throws Exception {
+    static BufferedImage encode( String imagePath, String text ) throws Exception {
         BufferedImage originalImage = getImageFromPath( imagePath );
         BufferedImage imageInUserSpace = getImageInUserSpace( originalImage );
 
@@ -25,7 +26,8 @@ public class UtilesSteganographie {
         byte textLengthInBytes[] = getBytesFromInt( textInBytes.length );
         encodeImage( imageInBytes, textLengthInBytes, 0 );
         encodeImage( imageInBytes, textInBytes, BYTESFORTEXTLENGTHDATA * BITSINBYTE );
-        saveImageToPath( imageInUserSpace, new File( finalFileName ), "png" );
+        //saveImageToPath( imageInUserSpace, new File( finalFileName ), "png" );
+        return imageInUserSpace;
     }
 
     // Decode
