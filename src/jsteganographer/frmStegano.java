@@ -45,8 +45,8 @@ public class frmStegano extends javax.swing.JFrame {
                     droppedFiles.forEach( file -> {
                         txtImageSource.setText( file.getAbsolutePath() );
                     } );
-                    String fileName = txtImageSource.getText();
-                    int position = fileName.lastIndexOf( "." );
+//                    String fileName = txtImageSource.getText();
+//                    int position = fileName.lastIndexOf( "." );
 //                    if ( position > 0 ) {
 //                        fileName = fileName.substring( 0, position );
 //                    }

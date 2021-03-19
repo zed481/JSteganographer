@@ -9,20 +9,14 @@ import javax.imageio.ImageIO;
 import javax.swing.JOptionPane;
 
 /**
+ * Affichage de l'image avec le texte chiffré et encodé à l'intérieur
  *
- * @author Usager
+ * mars 2021
  */
 public class frmImage extends javax.swing.JFrame {
 
-    /**
-     * Répertoire sélectionné
-     */
-    private BufferedImage image;
-    private String strOriginalFile;
-
-    public frmImage() {
-        initComponents();
-    }
+    final private BufferedImage image;
+    final private String strOriginalFile;
 
     public frmImage( BufferedImage image, String strOriginalFile ) {
         initComponents();
@@ -49,7 +43,7 @@ public class frmImage extends javax.swing.JFrame {
         cmdSaveImage = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Image");
+        setTitle("Image containing the encoded text!");
 
         jLabel1.setText("Label pour afficher l'image encodée");
 
@@ -87,13 +81,14 @@ public class frmImage extends javax.swing.JFrame {
     private void cmdSaveImageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdSaveImageActionPerformed
         try {
             final FileDialog fd = new FileDialog( this, "Destination", FileDialog.SAVE );
-            fd.setFile( "*.png" );
+            fd.setFile( strOriginalFile );
             fd.setVisible( true );
+
             if ( fd.getFile() != null ) {
                 String strNomFichier = fd.getDirectory().concat( fd.getFile() );
-//                if ( !strNomFichier.endsWith( ".png" ) || !strNomFichier.endsWith( ".PNG" ) ) {
-//                    strNomFichier = strNomFichier.concat( ".png" );
-//                }
+                if ( !strNomFichier.toLowerCase().endsWith( ".png" ) ) {
+                    strNomFichier = fd.getDirectory().concat( fd.getFile() ).concat( ".png" );
+                }
                 saveImageToPath( image, new File( strNomFichier ), "png" );
             }
         } catch ( IOException ioex ) {
