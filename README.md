@@ -6,4 +6,4 @@ Le texte est chiffré avec <code>Blowfish</code> avant d'être encodé dans l'im
 
 #### Steganography - Encrypt and hide text in a .PNG image
 
-The text is encrypted with <code>Blowfish</code> before being encoded in the image. The tool also extract the information encoded in the image.
+The text is encrypted with <code>Blowfish</code> before being encoded in the image. The tool can also extract the information encoded in the image.
