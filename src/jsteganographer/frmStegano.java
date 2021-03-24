@@ -7,6 +7,7 @@ import java.awt.datatransfer.UnsupportedFlavorException;
 import java.awt.dnd.DnDConstants;
 import java.awt.dnd.DropTarget;
 import java.awt.dnd.DropTargetDropEvent;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -28,6 +29,10 @@ public class frmStegano extends javax.swing.JFrame {
      */
     public frmStegano() {
         initComponents();
+
+        // Frame screen centered
+        this.setLocationRelativeTo( null );
+
         txtImageSource.setDropTarget( new DropTarget() {
             @Override
             public synchronized void drop( DropTargetDropEvent evt ) {
@@ -40,13 +45,12 @@ public class frmStegano extends javax.swing.JFrame {
                     droppedFiles.forEach( file -> {
                         txtImageSource.setText( file.getAbsolutePath() );
                     } );
-                    String fileName = txtImageSource.getText();
-                    int position = fileName.lastIndexOf( "." );
-                    if ( position > 0 ) {
-                        fileName = fileName.substring( 0, position );
-                    }
+//                    String fileName = txtImageSource.getText();
+//                    int position = fileName.lastIndexOf( "." );
+//                    if ( position > 0 ) {
+//                        fileName = fileName.substring( 0, position );
+//                    }
 
-                    txtImageDestination.setText( fileName + "_with_hidden_message.png" );
                 } catch ( UnsupportedFlavorException | IOException ex ) {
                     ex.printStackTrace( System.err );
                 }
@@ -60,8 +64,6 @@ public class frmStegano extends javax.swing.JFrame {
 
         cmdSource = new javax.swing.JButton();
         txtImageSource = new javax.swing.JTextField();
-        cmdDestination = new javax.swing.JButton();
-        txtImageDestination = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jPasswordField = new javax.swing.JPasswordField();
         jLabel2 = new javax.swing.JLabel();
@@ -70,10 +72,9 @@ public class frmStegano extends javax.swing.JFrame {
         cmdEncode = new javax.swing.JButton();
         cmdDecode = new javax.swing.JButton();
         cmdEffacer = new javax.swing.JButton();
-        cmdEffaceNomFichierDestination = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("jSteganographer v1.0");
+        setTitle("jSteganographer v1.1");
 
         cmdSource.setText("Source...");
         cmdSource.setToolTipText("Select source image");
@@ -84,14 +85,6 @@ public class frmStegano extends javax.swing.JFrame {
         });
 
         txtImageSource.setDragEnabled(true);
-
-        cmdDestination.setText("Destination...");
-        cmdDestination.setToolTipText("Select destination image with hidden text");
-        cmdDestination.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmdDestinationActionPerformed(evt);
-            }
-        });
 
         jLabel1.setText("Password :");
 
@@ -127,14 +120,6 @@ public class frmStegano extends javax.swing.JFrame {
             }
         });
 
-        cmdEffaceNomFichierDestination.setText("E");
-        cmdEffaceNomFichierDestination.setToolTipText("Erase the destination field (to decode a image file)");
-        cmdEffaceNomFichierDestination.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmdEffaceNomFichierDestinationActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -142,33 +127,29 @@ public class frmStegano extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(cmdSource, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(cmdDestination))
-                            .addComponent(jLabel1))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jPasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(60, 60, 60)
-                                .addComponent(cmdEncode)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(cmdDecode)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(cmdEffacer, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(txtImageDestination, javax.swing.GroupLayout.PREFERRED_SIZE, 459, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(cmdEffaceNomFichierDestination))
-                            .addComponent(txtImageSource, javax.swing.GroupLayout.Alignment.TRAILING)))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel2)
-                        .addGap(539, 539, 539)))
-                .addGap(17, 17, 17))
+                        .addGap(556, 556, 556))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(cmdSource, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel1))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jPasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(60, 60, 60)
+                                        .addComponent(cmdEncode)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(cmdDecode)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(cmdEffacer, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addComponent(txtImageSource, javax.swing.GroupLayout.Alignment.TRAILING))))
+                        .addGap(17, 17, 17))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -179,11 +160,6 @@ public class frmStegano extends javax.swing.JFrame {
                     .addComponent(txtImageSource, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cmdDestination)
-                    .addComponent(txtImageDestination, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cmdEffaceNomFichierDestination))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(jPasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cmdEncode)
@@ -192,8 +168,8 @@ public class frmStegano extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 264, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
@@ -202,51 +178,39 @@ public class frmStegano extends javax.swing.JFrame {
     private void cmdSourceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdSourceActionPerformed
         final FileDialog fd = new FileDialog( this, "Fichier source", FileDialog.LOAD );
         fd.setDirectory( LastDir );
-        fd.setFile( "*.*" );
+        fd.setFile( "*.png" );
         fd.setVisible( true );
         if ( fd.getFile() != null ) {
             LastDir = fd.getDirectory();
             txtImageSource.setText( fd.getDirectory().concat( fd.getFile() ) );
-
-            String fileName = txtImageSource.getText();
-            int position = fileName.lastIndexOf( "." );
-            if ( position > 0 ) {
-                fileName = fileName.substring( 0, position );
-            }
-
-            String finalFileName = fileName + "_with_hidden_message.png";
-
-            txtImageDestination.setText( finalFileName );
         }
     }//GEN-LAST:event_cmdSourceActionPerformed
 
-    private void cmdDestinationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdDestinationActionPerformed
-        final FileDialog fd = new FileDialog( this, "Fichier source", FileDialog.LOAD );
-        fd.setDirectory( LastDir );
-        fd.setFile( "*.*" );
-        fd.setVisible( true );
-        if ( fd.getFile() != null ) {
-            final String strNomFichier = fd.getDirectory().concat( fd.getFile() );
-            LastDir = fd.getDirectory();
-            txtImageSource.setText( strNomFichier );
-            txtImageDestination.setText( strNomFichier + ".bin" );
-        }
-    }//GEN-LAST:event_cmdDestinationActionPerformed
-
     private void cmdEncodeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdEncodeActionPerformed
-        try {
-            UtilesSteganographie.encode( txtImageSource.getText(), txtImageDestination.getText(), UtilesBlowFish.ChiffrerString( txtAEncoder.getText(), jPasswordField ) );
-            JOptionPane.showMessageDialog( this, "Encodage terminé!", "jSteganographer", JOptionPane.INFORMATION_MESSAGE );
-        } catch ( Exception e ) {
-            e.printStackTrace( System.err );
-            JOptionPane.showMessageDialog( this, e, "Erreur!", JOptionPane.ERROR_MESSAGE );
+        if ( txtAEncoder.getText().length() > 0 ) {
+            if ( jPasswordField.getPassword().length > 0 ) {
+                try {
+                    BufferedImage image = UtilesSteganographie.encode( txtImageSource.getText(), UtilesBlowFish.ChiffrerString( txtAEncoder.getText(), jPasswordField ) );
+                    new frmImage( image, txtImageSource.getText() ).setVisible( true );
+                } catch ( Exception e ) {
+                    e.printStackTrace( System.err );
+                    JOptionPane.showMessageDialog( this, e, "Erreur!", JOptionPane.ERROR_MESSAGE );
+                }
+            } else {
+                JOptionPane.showMessageDialog( this, "Please enter a password to encrypt the text.", "Password please!", JOptionPane.ERROR_MESSAGE );
+            }
+        } else {
+            JOptionPane.showMessageDialog( this, "Please enter a text to encode.", "Text needed!", JOptionPane.ERROR_MESSAGE );
         }
     }//GEN-LAST:event_cmdEncodeActionPerformed
 
     private void cmdDecodeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdDecodeActionPerformed
         try {
-            txtImageDestination.setText( "" );
-            txtAEncoder.setText( UtilesBlowFish.DechiffrerString( UtilesSteganographie.decode( txtImageSource.getText() ), jPasswordField ) );
+            if ( jPasswordField.getPassword().length > 0 ) {
+                txtAEncoder.setText( UtilesBlowFish.DechiffrerString( UtilesSteganographie.decode( txtImageSource.getText() ), jPasswordField ) );
+            } else {
+                JOptionPane.showMessageDialog( this, "Please enter a password to decrypt the text.", "Password please!", JOptionPane.ERROR_MESSAGE );
+            }
         } catch ( Exception e ) {
             e.printStackTrace( System.err );
             JOptionPane.showMessageDialog( this, e, "Erreur!", JOptionPane.ERROR_MESSAGE );
@@ -255,14 +219,9 @@ public class frmStegano extends javax.swing.JFrame {
 
     private void cmdEffacerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdEffacerActionPerformed
         txtImageSource.setText( "" );
-        txtImageDestination.setText( "" );
         txtAEncoder.setText( "" );
         jPasswordField.setText( "" );
     }//GEN-LAST:event_cmdEffacerActionPerformed
-
-    private void cmdEffaceNomFichierDestinationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdEffaceNomFichierDestinationActionPerformed
-        txtImageDestination.setText( "" );
-    }//GEN-LAST:event_cmdEffaceNomFichierDestinationActionPerformed
 
     /**
      * @param args the command line arguments
@@ -295,8 +254,6 @@ public class frmStegano extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cmdDecode;
-    private javax.swing.JButton cmdDestination;
-    private javax.swing.JButton cmdEffaceNomFichierDestination;
     private javax.swing.JButton cmdEffacer;
     private javax.swing.JButton cmdEncode;
     private javax.swing.JButton cmdSource;
@@ -305,7 +262,6 @@ public class frmStegano extends javax.swing.JFrame {
     private javax.swing.JPasswordField jPasswordField;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea txtAEncoder;
-    private javax.swing.JTextField txtImageDestination;
     private javax.swing.JTextField txtImageSource;
     // End of variables declaration//GEN-END:variables
 }
